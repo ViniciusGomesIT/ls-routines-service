@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "com.api.routines.model.IbgeConfig",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "base-uri",
+      "type": "java.lang.String",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    },
+    {
+      "name": "city-service-name",
+      "type": "java.lang.String",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    },
+    {
+      "name": "city-uri",
+      "type": "java.lang.String",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    },
+    {
+      "name": "state-service-name",
+      "type": "java.lang.String",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    },
+    {
+      "name": "state-uri",
+      "type": "java.lang.String",
+      "sourceType": "com.api.routines.model.IbgeConfig"
+    }
+  ],
+  "hints": []
+}

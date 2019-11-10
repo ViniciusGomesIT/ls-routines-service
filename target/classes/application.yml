@@ -1,0 +1,31 @@
+server:
+  port: 9091
+spring:
+  batch:    job:      enabled: false    initialize-schema: ALWAYS
+  main:    allow-bean-definition-overriding: true
+  jpa:
+    dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        type: trace
+  datasource:
+    url: jdbc:mysql://localhost:3306/desenv?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 558525
+feign:  compression:    response:      enabled: true    request:      enabled: true      mime-types:      - application/json
+      - text/xml
+      - application/xmlibge:
+  name: ibgeService
+  uri:
+    base: https://servicodados.ibge.gov.br/api
+  state:
+    uri: /v1/localidades/estados
+    name: ibgeState
+  city:
+    uri: /v1/localidades/municipios
+    name: ibgeCity
+  

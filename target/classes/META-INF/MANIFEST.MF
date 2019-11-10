@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: routines-service
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Vini
+Implementation-Vendor-Id: com.vinicius.library
+Build-Jdk: 1.8.0_231
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/routines-service
+Created-By: Maven Integration for Eclipse
+
