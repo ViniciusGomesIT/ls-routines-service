@@ -64,7 +64,13 @@
 		    <artifactId>feign-jackson</artifactId>
 		    <version>8.18.0</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+
 		<!-- LIBRARY DEPENDENCIES -->
 		<dependency>
 			<groupId>com.vinicius.library</groupId>

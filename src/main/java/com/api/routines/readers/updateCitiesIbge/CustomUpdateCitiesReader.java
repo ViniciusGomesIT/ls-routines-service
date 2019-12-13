@@ -1,17 +1,13 @@
 package com.api.routines.readers.updateCitiesIbge;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.zip.GZIPInputStream;
-
-import javax.inject.Inject;
-
+import com.api.routines.clients.IbgeClient;
+import com.api.routines.model.IbgeConfig;
+import com.api.routines.repository.ExecutedRoutinesInfoRepository;
+import com.api.routines.services.HttpService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vinicius.entity.commons.routines.RoutinesExecutedInfoEntity;
+import com.vinicius.request.response.commons.routines.ibge.update.city.response.CityResponse;
+import feign.Response;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
@@ -22,13 +18,15 @@ import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.stereotype.Component;
 
-import com.api.routines.clients.IbgeClient;
-import com.api.routines.repository.ExecutedRoutinesInfoRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vinicius.entity.commons.routines.RoutinesExecutedInfoEntity;
-import com.vinicius.request.response.commons.routines.ibge.update.city.response.CityResponse;
-
-import feign.Response;
+import javax.inject.Inject;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.zip.GZIPInputStream;
 
 @Component
 public class CustomUpdateCitiesReader implements ItemReader<List<CityResponse>> {
@@ -37,15 +35,22 @@ public class CustomUpdateCitiesReader implements ItemReader<List<CityResponse>> 
 	
 	private IbgeClient ibgeClient;
 	private ExecutedRoutinesInfoRepository executionRepository;
+	private HttpService httpService;
+	private IbgeConfig config;
 	
 	private List<CityResponse> listResponseParsed;
 	
 	private String batchName;
 	
 	@Inject
-	public CustomUpdateCitiesReader(IbgeClient ibgeClient, ExecutedRoutinesInfoRepository executionRepository) {
+	public CustomUpdateCitiesReader(IbgeClient ibgeClient,
+									ExecutedRoutinesInfoRepository executionRepository,
+									HttpService httpService,
+									IbgeConfig config) {
 		this.ibgeClient = ibgeClient;
 		this.executionRepository = executionRepository;
+		this.httpService = httpService;
+		this.config = config;
 	}
 	
 	@BeforeStep
@@ -68,6 +73,7 @@ public class CustomUpdateCitiesReader implements ItemReader<List<CityResponse>> 
 		
 		return null;
 	}
+	/*
 	private void ibgeCitiesIntegration() {
 		feign.Response listResponse = ibgeClient.getCities();
 		
@@ -84,6 +90,10 @@ public class CustomUpdateCitiesReader implements ItemReader<List<CityResponse>> 
 			LOG.info("There was an error while trying to parse response in batch {}. Cause {} Message {}", this.getClass().getSimpleName(), e.getCause(), e.getMessage());
 			LOG.info(Arrays.toString(e.getStackTrace()));
 		}
+	}
+	*/
+	private void ibgeCitiesIntegration() {
+		List<CityResponse> listCities = httpService.doRequest(config.getBaseUri().concat(config.getCityUri()), null);
 	}
 	
 	private String parseGzipToString(Response responseString) throws IOException {
