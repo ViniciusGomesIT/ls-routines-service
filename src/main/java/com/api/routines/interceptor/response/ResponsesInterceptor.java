@@ -10,10 +10,12 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
+@SuppressWarnings("unchecked")
+//TODO remover
 public class ResponsesInterceptor<T> implements ResponseHandler<T> {
 
-	 private static final Logger LOG = LoggerFactory.getLogger(ResponsesInterceptor.class);
-
+	private static final Logger LOG = LoggerFactory.getLogger(ResponsesInterceptor.class);
+	
 	@Override
 	public T handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 		if (response.getStatusLine().getStatusCode() == 200

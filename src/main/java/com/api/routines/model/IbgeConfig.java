@@ -2,8 +2,10 @@ package com.api.routines.model;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @ConfigurationProperties
+@Component
 public class IbgeConfig {
 
 	@Value("${ibge.uri.base}")
